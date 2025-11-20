@@ -3,6 +3,10 @@ package it.unibo.mvc;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Objects;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,10 +19,13 @@ import javax.swing.JTextArea;
  */
 public final class SimpleGUI {
 
-    private final JFrame frame = new JFrame("SimpleGUI");
     private static final int PROPORTION = 5;
+    private final JFrame frame = new JFrame("SimpleGUI");
+    private Controller controller;
 
-    public SimpleGUI(){
+    public SimpleGUI(final Controller controller){
+        this.controller = Objects.requireNonNull(controller);
+        //components
         final JPanel panel = new JPanel();
         final JTextArea contentText = new JTextArea();
         final JButton save = new JButton("Save");
@@ -29,6 +36,19 @@ public final class SimpleGUI {
         panel.add(save, BorderLayout.SOUTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        /*
+        *handler
+        */
+        save.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(final ActionEvent ignored){
+                try {
+                    controller.write(contentText.getText());
+                } catch (final IOException e){
+                    System.out.println(e.getMessage() + e.getCause());
+                }
+            }
+        });
     }
 
     private void display(){
@@ -45,6 +65,6 @@ public final class SimpleGUI {
     }
 
     public static void main(final String[] args){
-        new SimpleGUI().display();
+        new SimpleGUI(new Controller()).display();
     }
 }
