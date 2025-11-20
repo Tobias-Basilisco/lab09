@@ -89,7 +89,8 @@ public class BadIOGUI {
                     String msg = reader.readLine();
                     System.out.println(msg);
                 }catch (Exception e){
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace(); // NOPMD: allowed as this is just an exercise
                 }
             }
         });
