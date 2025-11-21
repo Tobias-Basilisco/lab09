@@ -2,6 +2,7 @@ package it.unibo.mvc;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.util.Objects;
 
@@ -35,11 +36,12 @@ public final class SimpleGUI {
         mainPanel.add(inputField, BorderLayout.NORTH);
         mainPanel.add(historyBoard, BorderLayout.CENTER);
         final JPanel btnPanel = new JPanel();
-        btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.LINE_AXIS));
+        btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
         mainPanel.add(btnPanel, BorderLayout.SOUTH);
         btnPanel.add(printButton);
         btnPanel.add(showHistoryButton);
 
+        frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -55,4 +57,8 @@ public final class SimpleGUI {
         frame.setVisible(true);
     }
 
+    public static void main(final String... args){
+        final SimpleGUI simpleGUI = new SimpleGUI(new SimpleController());
+        simpleGUI.display();
+    }
 }
