@@ -36,7 +36,7 @@ public final class SimpleGUI {
         mainPanel.add(inputField, BorderLayout.NORTH);
         mainPanel.add(historyBoard, BorderLayout.CENTER);
         final JPanel btnPanel = new JPanel();
-        btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
+        btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
         mainPanel.add(btnPanel, BorderLayout.SOUTH);
         btnPanel.add(printButton);
         btnPanel.add(showHistoryButton);
