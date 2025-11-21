@@ -22,10 +22,7 @@ public final class SimpleController implements Controller {
      */
     @Override
     public void setStrBuffer(final String strToBuffer) throws NullPointerException{
-        if (strToBuffer == null){
-            throw new NullPointerException();
-        }
-        strBuffer = strToBuffer;
+        strBuffer = Objects.requireNonNull(strToBuffer);
     }
 
     @Override
