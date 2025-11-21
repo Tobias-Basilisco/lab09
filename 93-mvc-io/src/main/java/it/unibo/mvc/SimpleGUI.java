@@ -1,6 +1,8 @@
 package it.unibo.mvc;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Objects;
 
 import javax.swing.BoxLayout;
@@ -42,8 +44,15 @@ public final class SimpleGUI {
     }
 
     private void display(){
-        
-    }
+        //window app size
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        final int sw = (int) screenSize.getWidth();
+        final int sh = (int) screenSize.getHeight();
+        frame.setSize(sw / PROPORTION, sh / PROPORTION);
 
+        frame.setLocationByPlatform(true);
+
+        frame.setVisible(true);
+    }
 
 }
