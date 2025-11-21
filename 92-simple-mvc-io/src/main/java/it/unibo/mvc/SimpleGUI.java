@@ -66,8 +66,6 @@ public class SimpleGUI {
 
         frame.setLocationByPlatform(true);
 
-        // frame.pack();
-
         frame.setVisible(true);
     }
 
