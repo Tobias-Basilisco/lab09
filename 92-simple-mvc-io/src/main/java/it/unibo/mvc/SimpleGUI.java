@@ -37,9 +37,7 @@ public class SimpleGUI {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        /*
-        *handler
-        */
+        //handler
         save.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(final ActionEvent ignored){

@@ -1,12 +1,16 @@
 package it.unibo.mvc;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.plaf.FileChooserUI;
 
 
 /**
@@ -32,7 +36,19 @@ public class SimpleGUIWithFileChooser extends SimpleGUI {
         browseBar.add(filePath, BorderLayout.LINE_START);
         browseBar.add(browseButton, BorderLayout.LINE_END);
 
-        
+        //handler
+        browseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ignored){
+                JFileChooser fChooser = new JFileChooser();
+                int result = fChooser.showOpenDialog(mainFrame);
+                if (result == JFileChooser.APPROVE_OPTION){
+                    final File fileChosen = fChooser.getSelectedFile();
+                    controller.setCurrentFile(fileChosen);
+                    filePath.setText(fileChosen.getAbsolutePath());
+                }
+            }
+        });   
     }
 
     public static void main(final String[] args){
