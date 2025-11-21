@@ -20,15 +20,19 @@ import javax.swing.plaf.FileChooserUI;
 public class SimpleGUIWithFileChooser extends SimpleGUI {
 
     private final JPanel browseBar = new JPanel();
+    private JTextArea filePath;
+    private JButton browseButton;
+    private JFrame mainFrame;
+
 
     public SimpleGUIWithFileChooser(final Controller controller){
         super(controller);
         setFrameTitle("File writter app");
 
         //components
-        final JFrame mainFrame = getFrame();
-        JButton browseButton = new JButton("Browse...");
-        JTextArea filePath = new JTextArea();
+        mainFrame = getFrame();
+        browseButton = new JButton("Browse...");
+        filePath = new JTextArea();
         filePath.setEditable(false);
         //components position
         browseBar.setLayout(new BorderLayout());
@@ -40,15 +44,19 @@ public class SimpleGUIWithFileChooser extends SimpleGUI {
         browseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ignored){
-                JFileChooser fChooser = new JFileChooser();
-                int result = fChooser.showOpenDialog(mainFrame);
-                if (result == JFileChooser.APPROVE_OPTION){
-                    final File fileChosen = fChooser.getSelectedFile();
-                    controller.setCurrentFile(fileChosen);
-                    filePath.setText(fileChosen.getAbsolutePath());
-                }
+                showSaveDialog();
             }
         });   
+    }
+
+    private void showSaveDialog(){
+        JFileChooser fChooser = new JFileChooser();
+        int result = fChooser.showOpenDialog(mainFrame);
+        if (result == JFileChooser.APPROVE_OPTION){
+            final File fileChosen = fChooser.getSelectedFile();
+            controller.setCurrentFile(fileChosen);
+            filePath.setText(fileChosen.getAbsolutePath());
+        }
     }
 
     public static void main(final String[] args){
