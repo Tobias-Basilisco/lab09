@@ -8,6 +8,7 @@ import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.plaf.FileChooserUI;
@@ -52,10 +53,15 @@ public class SimpleGUIWithFileChooser extends SimpleGUI {
     private void showSaveDialog(){
         JFileChooser fChooser = new JFileChooser();
         int result = fChooser.showOpenDialog(mainFrame);
-        if (result == JFileChooser.APPROVE_OPTION){
-            final File fileChosen = fChooser.getSelectedFile();
-            controller.setCurrentFile(fileChosen);
-            filePath.setText(fileChosen.getAbsolutePath());
+        switch (result){
+            case JFileChooser.APPROVE_OPTION:
+                final File fileChosen = fChooser.getSelectedFile();
+                controller.setCurrentFile(fileChosen);
+                filePath.setText(fileChosen.getAbsolutePath());
+            case JFileChooser.CANCEL_OPTION:
+                break;
+            default:
+                JOptionPane.showMessageDialog(mainFrame, "Error: something went wrong, verify file selection");
         }
     }
 
