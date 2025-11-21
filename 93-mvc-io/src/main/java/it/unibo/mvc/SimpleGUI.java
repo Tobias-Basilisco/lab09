@@ -1,13 +1,49 @@
 package it.unibo.mvc;
 
+import java.awt.BorderLayout;
+import java.util.Objects;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  * A very simple program using a graphical interface.
  *
  */
 public final class SimpleGUI {
+    private static final int PROPORTION = 5;
 
-    private final JFrame frame = new JFrame();
+    private Controller ctrl;
+    private final JFrame frame = new JFrame("Print history app");
+    private final JPanel mainPanel = new JPanel();
+    private final JTextField inputField = new JTextField();
+    private final JTextArea historyBoard = new JTextArea();
+    private final JButton printButton = new JButton("Print");
+    private final JButton showHistoryButton = new JButton("Show history");
+
+    public SimpleGUI(final Controller controller){
+        ctrl = Objects.requireNonNull(controller);
+
+        //components position
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(inputField, BorderLayout.NORTH);
+        mainPanel.add(historyBoard, BorderLayout.CENTER);
+        final JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.LINE_AXIS));
+        mainPanel.add(btnPanel, BorderLayout.SOUTH);
+        btnPanel.add(printButton);
+        btnPanel.add(showHistoryButton);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private void display(){
+        
+    }
+
 
 }
